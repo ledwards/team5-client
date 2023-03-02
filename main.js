@@ -91,6 +91,8 @@ function createWindow() {
   window = new BrowserWindow({
     width: 1920,
     height: 1080,
+    backgroundColor: '#000000',
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
     webPreferences: {
       devTools: true,
       plugins: true,
