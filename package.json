@@ -1,0 +1,38 @@
+{
+    "name": "team5-client",
+    "productName": "Team 5",
+    "version": "0.0.1",
+    "description": "Team 5 Client",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ledwards/team5-client.git"
+    },
+    "keywords": [],
+    "author": "Lee Edwards <lee@ledwards.com> (https://github.com/ledwards)",
+    "license": "MIT",
+    "main": "main.js",
+    "build": {
+        "extraResources": [
+            "./extensions"
+        ]
+    },
+    "scripts": {
+        "start": "electron-forge start",
+        "dev": "npm run build-extensions && npm start",
+        "package": "electron-forge package",
+        "build-extensions": "./build-extensions.sh",
+        "make": "npm run build-extensions && electron-forge make"
+    },
+    "dependencies": {
+        "airtable": "^0.11.6",
+        "electron-squirrel-startup": "^1.0.0"
+    },
+    "devDependencies": {
+        "@electron-forge/cli": "^6.0.5",
+        "@electron-forge/maker-deb": "^6.0.5",
+        "@electron-forge/maker-rpm": "^6.0.5",
+        "@electron-forge/maker-squirrel": "^6.0.5",
+        "@electron-forge/maker-zip": "^6.0.5",
+        "electron": "^23.1.1"
+    }
+}

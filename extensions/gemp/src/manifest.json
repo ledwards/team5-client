@@ -1,0 +1,45 @@
+{
+    "manifest_version": 3,
+    "name": "Team 5",
+    "description": "An internal Electron extension for the Team 5 Client.",
+    "version": "0.0.1",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_title": "Team 5"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://gemp.starwarsccg.org/gemp-swccg/game.html*"
+            ],
+            "js": [
+                "game.js"
+            ]
+        },
+        {
+            "matches": [
+                "https://gemp.starwarsccg.org/gemp-swccg/"
+            ],
+            "js": [
+                "root.js"
+            ]
+        }
+    ],
+    "permissions": [
+        "storage"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                ".env.json",
+                "Dark.json",
+                "Light.json"
+            ],
+            "matches": [
+                "https://gemp.starwarsccg.org/*"
+            ]
+        }
+    ]
+}
