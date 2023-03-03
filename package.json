@@ -11,33 +11,27 @@
     "author": "Lee Edwards <lee@ledwards.com> (https://github.com/ledwards)",
     "license": "MIT",
     "main": "main.js",
-    "build": {
-        "extraResources": [
-            "./extensions"
-        ]
-    },
     "electronPackagerConfig": {
-        "icon": "assets/icon/icon"
+        "icon": "assets/icons/icon"
     },
     "scripts": {
         "start": "electron-forge start",
         "dev": "npm run build-extensions && npm start",
-        "package": "electron-forge package",
         "build-extensions": "./build-extensions.sh",
         "build-icons": "electron-icon-maker --input=./assets/icons/team5.png --output=./assets",
-        "make": "npm run build-extensions && electron-forge make"
+        "make-darwin": "electron-packager . 'Team 5' --platform=darwin --arch=x64,arm64 --out=dist --overwrite --icon=assets/icons/mac/icon.icns",
+        "make-win32": "electron-packager . 'Team 5' --platform=win32 --arch=x64,ia32,arm64 --out=dist --overwrite --icon=assets/icons/win/icon.ico",
+        "make": "npm run build-extensions && npm run make-darwin && npm run make-win32"
     },
+    "postinstall": "electron-builder install-app-deps",
     "dependencies": {
         "airtable": "^0.11.6",
         "electron-squirrel-startup": "^1.0.0"
     },
     "devDependencies": {
         "@electron-forge/cli": "^6.0.5",
-        "@electron-forge/maker-deb": "^6.0.5",
-        "@electron-forge/maker-rpm": "^6.0.5",
-        "@electron-forge/maker-squirrel": "^6.0.5",
-        "@electron-forge/maker-zip": "^6.0.5",
         "electron": "^23.1.1",
-        "electron-icon-maker": "^0.0.5"
+        "electron-icon-maker": "^0.0.5",
+        "electron-packager": "^17.1.1"
     }
 }

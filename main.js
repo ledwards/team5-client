@@ -1,11 +1,18 @@
 const { app, BrowserWindow, Menu, session } = require('electron')
+
 const path = require('path')
 
 let window;
 let menu;
 
+const isMac = process.platform === 'darwin';
+const isWin = process.platform === 'win32';
+
+if (isWin) { // required to prevent crash, at least in Parallels
+  app.commandLine.appendSwitch('in-process-gpu');
+}
+
 function createMenu() {
-  const isMac = process.platform === 'darwin';
   const template = [
     // { role: 'appMenu' }
     ...(isMac ? [{
