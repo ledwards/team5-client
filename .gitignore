@@ -14,3 +14,4 @@ extensions/**/src/data/*
 assets/icons/
 
 electron-builder.yml
+build/entitlements*.plist

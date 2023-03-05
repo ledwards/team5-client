@@ -1,7 +1,7 @@
 {
     "name": "team5-client",
     "productName": "Team 5",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Team 5 Client",
     "repository": {
         "type": "git",
@@ -12,6 +12,7 @@
     "license": "MIT",
     "main": "main.js",
     "build": {
+        "afterSign": "scripts/notarize.js",
         "extraResources": [
             "./extensions/gemp/dist"
         ]
@@ -21,19 +22,18 @@
         "dev": "npm run build-extensions && npm start",
         "build-extensions": "./build-extensions.sh",
         "build-icons": "electron-icon-maker --input=./assets/team5.png --output=./assets && cp assets/icons/mac/icon.icns build/ && cp assets/icons/win/icon.ico build/",
-        "build": "source .env && npm run build-extensions && electron-builder build --mac --win --publish never",
-        "deploy": "source .env && npm run build-extensions && electron-builder build --mac --win --publish always"
+        "build": "npm run build-extensions && electron-builder build --mac --win --publish never",
+        "deploy": "npm run build-extensions && electron-builder build --mac --win --publish always"
     },
     "dependencies": {
         "airtable": "^0.11.6",
         "electron-updater": "^5.3.0"
     },
     "devDependencies": {
+        "dotenv": "^16.0.3",
         "electron": "^23.1.1",
         "electron-builder": "^23.6.0",
-        "electron-builder-notarize": "^1.5.1",
         "electron-icon-maker": "^0.0.5",
-        "node-env-run": "^4.0.2",
-        "nodenv": "^0.1.0"
+        "electron-notarize": "^1.2.2"
     }
 }
