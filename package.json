@@ -1,7 +1,7 @@
 {
     "name": "team5-client",
     "productName": "Team 5",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Team 5 Client",
     "repository": {
         "type": "git",
@@ -11,12 +11,18 @@
     "author": "Lee Edwards <lee@ledwards.com> (https://github.com/ledwards)",
     "license": "MIT",
     "main": "main.js",
+    "build": {
+        "extraResources": [
+            "./extensions/gemp/dist"
+        ]
+    },
     "scripts": {
         "start": "electron .",
         "dev": "npm run build-extensions && npm start",
         "build-extensions": "./build-extensions.sh",
         "build-icons": "electron-icon-maker --input=./assets/team5.png --output=./assets && cp assets/icons/mac/icon.icns build/ && cp assets/icons/win/icon.ico build/",
-        "build": "npm run build-extensions && electron-builder -mw"
+        "build": "source .env && npm run build-extensions && electron-builder build --mac --win --publish never",
+        "deploy": "source .env && npm run build-extensions && electron-builder build --mac --win --publish always"
     },
     "dependencies": {
         "airtable": "^0.11.6",
@@ -25,6 +31,9 @@
     "devDependencies": {
         "electron": "^23.1.1",
         "electron-builder": "^23.6.0",
-        "electron-icon-maker": "^0.0.5"
+        "electron-builder-notarize": "^1.5.1",
+        "electron-icon-maker": "^0.0.5",
+        "node-env-run": "^4.0.2",
+        "nodenv": "^0.1.0"
     }
 }

@@ -12,3 +12,5 @@ dist/
 
 extensions/**/src/data/*
 assets/icons/
+
+electron-builder.yml

@@ -2,9 +2,9 @@
     "manifest_version": 3,
     "name": "Team 5",
     "description": "An internal Electron extension for the Team 5 Client.",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "./js/background.js"
     },
     "action": {
         "default_title": "Team 5"

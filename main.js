@@ -1,5 +1,5 @@
-const { app, BrowserWindow, Menu, session } = require('electron')
-
+const { app, BrowserWindow, Menu, session, ipcMain } = require('electron')
+const { autoUpdater } = require('electron-updater');
 const path = require('path')
 
 let window;
@@ -128,6 +128,36 @@ function init() {
   createMenu();
   createWindow();
   loadExtension();
+
+  window.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
 }
 
-app.on('ready', init)
+app.on('window-all-closed', function() {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate', function() {
+  if (mainWindow === null) {
+    init();
+  }
+});
+
+app.on('ready', init);
+
+ipcMain.on('app_version', (event) => {
+  console.log(`> Updated to app version ${app.getVersion()}`);
+});
+
+autoUpdater.on('update-available', () => {
+  // mainWindow.webContents.send('update_available');
+  console.log("Update available.");
+});
+
+autoUpdater.on('update-downloaded', () => {
+  // mainWindow.webContents.send('update_downloaded');
+  console.log("Update downloaded.");
+});
